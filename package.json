@@ -1,0 +1,47 @@
+{
+  "name": "gigachat-openai-client",
+  "version": "0.1.0",
+  "description": "GigaChat API client for Node.js (OpenAI-compatible /v1/models and /v1/chat/completions): OAuth, Basic auth, mTLS hooks, TLS helpers",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/llm-client.js",
+  "types": "./dist/llm-client.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/llm-client.d.ts",
+      "import": "./dist/llm-client.js",
+      "default": "./dist/llm-client.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20.10.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run build",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-transform-types llm-test.ts",
+    "pack:dry": "npm pack --dry-run"
+  },
+  "keywords": [
+    "gigachat",
+    "openai",
+    "openai-compatible",
+    "sber",
+    "llm",
+    "chat"
+  ],
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "undici": "^7.24.5"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "typescript": "^5.9.3"
+  }
+}
