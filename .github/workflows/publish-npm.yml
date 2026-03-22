@@ -1,13 +1,12 @@
-# Публикация в npm: при создании Release на GitHub или вручную (Actions → Run workflow).
-# Репозиторий → Settings → Secrets and variables → Actions → New repository secret:
-#   NPM_TOKEN — Automation token с npmjs.com (или Granular Access Token с правом publish).
+# Публикация в npm: Release (published) или вручную (Actions → Run workflow).
+# Секрет NPM_TOKEN: npmjs.com → Granular/Automation с Publish (и bypass 2FA при необходимости).
 
 name: Publish to npm
 
 on:
+  workflow_dispatch:
   release:
     types: [published]
-  workflow_dispatch:
 
 jobs:
   publish:
@@ -32,8 +31,8 @@ jobs:
       - name: Build
         run: npm run build
 
+      # Первый scoped-пакет: npm publish --access public (уже в команде ниже).
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        # Scoped-пакеты (@scope/name) тоже нуждаются в --access public при первой публикации
         run: npm publish --access public
